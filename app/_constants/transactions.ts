@@ -6,7 +6,7 @@ import {
 
 export const TRANSACTION_PAYMENT_METHOD_ICONS = {
   [TransactionPaymentMethod.CREDIT_CARD]: "credit-card.svg",
-  [TransactionPaymentMethod.DEBIT_CARD]: "debit-card.svg",
+  [TransactionPaymentMethod.DEBIT_CARD]: "credit-card.svg",
   [TransactionPaymentMethod.BANK_TRANSFER]: "bank-transfer.svg",
   [TransactionPaymentMethod.BANK_SLIP]: "bank-slip.svg",
   [TransactionPaymentMethod.CASH]: "money.svg",
