@@ -5,14 +5,19 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import UpsertTransactionDialog from "./upsert-transaction-dialog";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "./ui/tooltip";
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/app/_components/ui/dialog";
+import Link from "next/link";
 
 interface AddTransactionButtonProps {
-  userCanAddTransaction?: boolean;
+  userCanAddTransaction: boolean;
 }
 
 const AddTransactionButton = ({
@@ -22,28 +27,51 @@ const AddTransactionButton = ({
 
   return (
     <>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger asChild>
+      {userCanAddTransaction ? (
+        <>
+          <Button
+            className="rounded-full font-bold"
+            onClick={() => setDialogIsOpen(userCanAddTransaction)}
+          >
+            Adicionar transação
+            <ArrowDownUpIcon />
+          </Button>
+          <UpsertTransactionDialog
+            isOpen={dialogIsOpen}
+            setIsOpen={setDialogIsOpen}
+          />
+        </>
+      ) : (
+        <Dialog>
+          <DialogTrigger asChild>
             <Button
               className="rounded-full font-bold"
-              onClick={() => setDialogIsOpen(true)}
-              disabled={!userCanAddTransaction}
+              onClick={() => setDialogIsOpen(userCanAddTransaction)}
             >
               Adicionar transação
               <ArrowDownUpIcon />
             </Button>
-          </TooltipTrigger>
-          <TooltipContent>
-            {!userCanAddTransaction &&
-              "Você atingiu o limite de transações. Atualize seu plano para criar transações ilimitadas."}
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-      <UpsertTransactionDialog
-        isOpen={dialogIsOpen}
-        setIsOpen={setDialogIsOpen}
-      />
+          </DialogTrigger>
+          <DialogContent className="max-h-[500px] max-w-[600px]">
+            <DialogHeader>
+              <DialogTitle>Adicionar transação</DialogTitle>
+              <DialogDescription>
+                Você atingiu o limite de transações no plano Básico. Adquira o
+                plano Premium para ter lançamentos ilimitados e ainda ter
+                insights com IA de sua saúde financeira
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="ghost">Cancelar</Button>
+              </DialogClose>
+              <Button asChild>
+                <Link href="/subscription">Assinar plano premium</Link>
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      )}
     </>
   );
 };
