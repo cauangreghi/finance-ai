@@ -17,7 +17,7 @@ import {
 import Link from "next/link";
 
 interface AddTransactionButtonProps {
-  userCanAddTransaction: boolean;
+  userCanAddTransaction?: boolean;
 }
 
 const AddTransactionButton = ({
@@ -46,7 +46,7 @@ const AddTransactionButton = ({
           <DialogTrigger asChild>
             <Button
               className="rounded-full font-bold"
-              onClick={() => setDialogIsOpen(userCanAddTransaction)}
+              onClick={() => setDialogIsOpen(true)}
             >
               Adicionar transação
               <ArrowDownUpIcon />

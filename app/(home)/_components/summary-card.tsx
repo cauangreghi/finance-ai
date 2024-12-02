@@ -7,7 +7,7 @@ interface SummaryCardProps {
   title: string;
   amount: number;
   size?: "small" | "large";
-  userCanAddTransaction?: boolean;
+  userCanAddTransaction: boolean;
 }
 
 const SummaryCard = ({
@@ -17,9 +17,6 @@ const SummaryCard = ({
   size = "small",
   userCanAddTransaction,
 }: SummaryCardProps) => {
-  if (!userCanAddTransaction) {
-    throw new Error("Unauthorized");
-  }
   return (
     <Card>
       <CardHeader className="flex-row items-center gap-4">
