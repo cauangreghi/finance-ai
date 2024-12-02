@@ -17,6 +17,9 @@ const SummaryCard = ({
   size = "small",
   userCanAddTransaction,
 }: SummaryCardProps) => {
+  if (!userCanAddTransaction) {
+    throw new Error("Unauthorized");
+  }
   return (
     <Card>
       <CardHeader className="flex-row items-center gap-4">
