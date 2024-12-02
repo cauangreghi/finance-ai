@@ -8,7 +8,7 @@ import {
   TRANSACTION_PAYMENT_METHOD_LABELS,
 } from "@/app/_constants/transactions";
 import EditTransactionButton from "../_components/edit-transaction-button";
-import DeleteTransactionButton from "../_components/delete-transaction-button";
+import { TrashIcon } from "lucide-react";
 
 export const transactionColumns: ColumnDef<Transaction>[] = [
   {
@@ -60,7 +60,7 @@ export const transactionColumns: ColumnDef<Transaction>[] = [
       return (
         <div className="space-x-1">
           <EditTransactionButton transaction={transaction} />
-          <DeleteTransactionButton transaction={transaction} />
+          <TrashIcon />
         </div>
       );
     },
