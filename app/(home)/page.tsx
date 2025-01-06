@@ -14,19 +14,22 @@ import AiReportButton from "./_components/ai-report-button";
 interface HomeProps {
   searchParams: {
     month: string;
+    year: string;
   };
 }
 
-const Home = async ({ searchParams: { month } }: HomeProps) => {
+const Home = async ({ searchParams: { month, year } }: HomeProps) => {
   const { userId } = await auth();
   if (!userId) {
     redirect("/login");
   }
   const monthIsInvalid = !month || !isMatch(month, "MM");
   if (monthIsInvalid) {
-    redirect(`?month=${new Date().getMonth() + 1}`);
+    redirect(
+      `?month=${new Date().getMonth() + 1}&year=${new Date().getFullYear()}`,
+    );
   }
-  const dashboard = await getDashboard(month);
+  const dashboard = await getDashboard(month, year);
   const userCanAddTransaction = await canUserAddTransaction();
   const user = await clerkClient().users.getUser(userId);
   return (
@@ -51,6 +54,7 @@ const Home = async ({ searchParams: { month } }: HomeProps) => {
           <div className="flex flex-col gap-6 overflow-hidden">
             <SummaryCards
               month={month}
+              year={year}
               {...dashboard}
               userCanAddTransaction={userCanAddTransaction}
             />

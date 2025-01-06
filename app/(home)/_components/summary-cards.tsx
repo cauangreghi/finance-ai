@@ -7,6 +7,7 @@ import {
 import SummaryCard from "./summary-card";
 
 interface SummaryCards {
+  year: string;
   month: string;
   balance: number;
   depositsTotal: number;

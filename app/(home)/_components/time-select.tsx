@@ -29,7 +29,7 @@ const TimeSelect = () => {
   const searchParams = useSearchParams();
   const month = searchParams.get("month");
   const handleMonthChange = (month: string) => {
-    push(`/?month=${month}`);
+    push(`/?month=${month}&year=${new Date().getFullYear()}`);
   };
   return (
     <Select
